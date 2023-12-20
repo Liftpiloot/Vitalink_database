@@ -3,9 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Resources\Json\JsonResource;
-
-class ShowUserRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     public function authorize(): bool
     {

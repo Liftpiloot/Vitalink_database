@@ -24,8 +24,7 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::apiResource('/users', \App\Http\Controllers\Api\V1\UserController::class);
 
-    Route::get('/users/showByEmailAndPassword', [\App\Http\Controllers\Api\V1\UserController::class, 'showByEmailAndPassword']);
-
+    Route::post('/login', [\App\Http\Controllers\Api\V1\UserController::class, 'login']);
 });
 
 
