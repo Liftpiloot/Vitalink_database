@@ -17,12 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('/v1/tasks', TaskController::class);
+Route::group(['prefix' => '/v1'], function () {
+    Route::apiResource('/tasks', TaskController::class);
 
-Route::patch('/v1/tasks/{task}/complete', [CompleteTaskController::class, 'complete']);
+    Route::patch('/tasks/{task}/complete', [CompleteTaskController::class, 'complete']);
+
+    Route::apiResource('/users', \App\Http\Controllers\Api\V1\UserController::class);
+
+    Route::get('/users/showByEmailAndPassword', [\App\Http\Controllers\Api\V1\UserController::class, 'showByEmailAndPassword']);
+
+});
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 
