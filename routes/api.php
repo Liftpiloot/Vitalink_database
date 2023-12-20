@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\V1\TaskController;
-use App\Http\Controllers\Api\V1\CompleteTaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => '/v1'], function () {
-    Route::apiResource('/tasks', TaskController::class);
-
-    Route::patch('/tasks/{task}/complete', [CompleteTaskController::class, 'complete']);
 
     Route::apiResource('/users', \App\Http\Controllers\Api\V1\UserController::class);
 
