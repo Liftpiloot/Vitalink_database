@@ -20,6 +20,11 @@ Route::group(['prefix' => '/v1'], function () {
     Route::apiResource('/users', \App\Http\Controllers\Api\V1\UserController::class);
 
     Route::post('/login', [\App\Http\Controllers\Api\V1\UserController::class, 'login']);
+
+    Route::post('/addsenior', [\App\Http\Controllers\Api\V1\UserController::class, 'addSenior']);
+
+    Route::get('/getSeniors', [\App\Http\Controllers\Api\V1\UserController::class, 'getSeniors']);
+
 });
 
 

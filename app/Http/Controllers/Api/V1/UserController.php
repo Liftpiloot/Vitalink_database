@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddSeniorRequest;
+use App\Http\Requests\GetSeniorsRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\SeniorFamilyResource;
 use App\Http\Resources\UserResource;
+use App\Models\SeniorFamily;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -58,6 +62,18 @@ class UserController extends Controller
         $user->delete();
 
         return response()->noContent();
+    }
+
+    public function addSenior(AddSeniorRequest $request)
+    {
+        $seniorFamily = SeniorFamily::create($request->validated());
+        return new SeniorFamilyResource($seniorFamily);
+    }
+
+    public function getSeniors(getSeniorsRequest $request)
+    {
+        $seniorFamily = SeniorFamily::where('user_id', $request->user_id)->get();
+        return SeniorFamilyResource::collection($seniorFamily);
     }
 
 }
