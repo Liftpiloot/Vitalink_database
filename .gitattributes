@@ -9,3 +9,8 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+
+config/* linguist-vendored
+storage/* linguist-vendored
+vendor/* linguist-vendored
+
