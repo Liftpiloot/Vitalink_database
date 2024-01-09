@@ -25,6 +25,10 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::get('/getSeniors', [\App\Http\Controllers\Api\V1\UserController::class, 'getSeniors']);
 
+    Route::post('/addHealthData', [\App\Http\Controllers\Api\V1\UserController::class, 'addHealthData']);
+
+    Route::get('/getHealthData', [\App\Http\Controllers\Api\V1\UserController::class, 'getHealthData']);
+
 });
 
 

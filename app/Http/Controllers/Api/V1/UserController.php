@@ -8,8 +8,11 @@ use App\Http\Requests\GetSeniorsRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\AddHealthDataRequest;
 use App\Http\Resources\SeniorFamilyResource;
+use App\Http\Resources\HealthDataResource;
 use App\Http\Resources\UserResource;
+use App\Models\HealthData;
 use App\Models\SeniorFamily;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -74,6 +77,24 @@ class UserController extends Controller
     {
         $seniorFamily = SeniorFamily::where('user_id', $request->user_id)->get();
         return SeniorFamilyResource::collection($seniorFamily);
+    }
+
+    public function addHealthData(AddHealthDataRequest $request)
+    {
+        // check if health data already exists, if so update it
+        $healthData = HealthData::where('user_id', $request->user_id)->where('type', $request->type)->first();
+        if ($healthData !== null) {
+            $healthData->update($request->validated());
+            return new HealthDataResource($healthData);
+        }
+        return $healthData = HealthData::create($request->validated());
+    }
+
+    // get health data
+    public function getHealthData(getSeniorsRequest $request)
+    {
+        $healthData = HealthData::where('user_id', $request->user_id)->get();
+        return HealthDataResource::collection($healthData);
     }
 
 }

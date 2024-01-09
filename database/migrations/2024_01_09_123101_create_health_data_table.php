@@ -11,10 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('senior_family', function (Blueprint $table) {
+        Schema::create('health_data', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('senior_email');
+            $table->float('data');
+            $table->enum(
+                'type',
+                [
+                    'temperature',
+                    'heartbeat'
+                ]
+            );
             $table->timestamps();
         });
     }
@@ -24,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('senior_family');
+        Schema::dropIfExists('health_data');
     }
 };
